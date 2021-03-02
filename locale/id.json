@@ -1,0 +1,47 @@
+{
+  "common": {
+    "other": "Lainnya",
+    "upload": "Upload",
+    "share": "Bagikan",
+    "save": "Simpan",
+    "errorTitle": "Terjadi sebuah kesalahan"
+  },
+  "errors": {
+    "qrEncoding": "Terjadi sebuah kesalahan saat mencoba mengkonstruksi QR Code"
+  },
+  "global": {
+    "brandName": "Menyu"
+  },
+  "pages": {
+    "home": {
+      "actions": {
+        "start": "Mulai Upload"
+      },
+      "desc": "Upload dan bungkus menyu makanyan kamu menjadi sebuah QR Code dan sebarkan kepada dunyia"
+    },
+    "start": {
+      "title": "Upload Menyu makanyan",
+      "desc": "Isi beberapa informasi yang dibutuhkan"
+    },
+    "share": {
+      "title": "Sebarkan Menyu Makanyanmu",
+      "desc": "Menyu makanan sudah siaaap!"
+    }
+  },
+  "components": {
+    "uploadForm": {
+      "name": {
+        "label": "Nyama Restoran",
+        "placeholder": "Isi nyama restoranmu"
+      },
+      "category": {
+        "label": "Kategori",
+        "placeholder": "Tulis nama kategori",
+        "default": "Pilih Kategori"
+      },
+      "file": {
+        "label": "Gambar/Pdf"
+      }
+    }
+  }
+}
