@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { AppProps } from 'next/app';
+import { Tracking } from 'nextwarm';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import i18n from 'i18next';
@@ -37,6 +40,18 @@ i18n.use(initReactI18next).init({
 });
 
 function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url: URL) => {
+      Tracking.pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <ChakraProvider theme={extendedTheme}>
       <Component {...pageProps} />
