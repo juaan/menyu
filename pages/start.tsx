@@ -15,12 +15,13 @@ const UploadPage = () => {
   const [loading, setLoading] = useState(false);
   const timeoutId = useRef<NodeJS.Timeout | undefined>();
 
-  const handleSubmit = () => {
+  const handleSubmit = (params: { name: string; files: FileList }) => {
+    console.log(params);
     setLoading(true);
-    timeoutId.current = setTimeout(() => {
-      setLoading(false);
-      router.push('/share');
-    }, 1000);
+    // timeoutId.current = setTimeout(() => {
+    //   setLoading(false);
+    //   router.push('/share');
+    // }, 1000);
   };
 
   useEffect(() => {

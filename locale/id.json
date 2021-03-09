@@ -17,22 +17,22 @@
       "actions": {
         "start": "Mulai Upload"
       },
-      "desc": "Upload dan bungkus menyu makanyan kamu menjadi sebuah QR Code dan sebarkan kepada dunyia"
+      "desc": "Upload dan bungkus menyu makanan kamu menjadi sebuah QR Code dan sebarkan kepada dunia"
     },
     "start": {
-      "title": "Upload Menyu makanyan",
+      "title": "Upload Menyu makanan",
       "desc": "Isi beberapa informasi yang dibutuhkan"
     },
     "share": {
-      "title": "Sebarkan Menyu Makanyanmu",
+      "title": "Sebarkan Menyu Makananmu",
       "desc": "Menyu makanan sudah siaaap!"
     }
   },
   "components": {
     "uploadForm": {
       "name": {
-        "label": "Nyama Restoran",
-        "placeholder": "Isi nyama restoranmu"
+        "label": "Nama Restoran",
+        "placeholder": "Isi nama restoranmu"
       },
       "category": {
         "label": "Kategori",
@@ -40,7 +40,8 @@
         "default": "Pilih Kategori"
       },
       "file": {
-        "label": "Gambar/Pdf"
+        "label": "Gambar/Pdf",
+        "placeholder": "Upload menyu (pdf/image)"
       }
     }
   }
