@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React, { useState, useRef, RefAttributes } from 'react';
+import React, { useState, useRef } from 'react';
 import { Box } from '@chakra-ui/react';
 
 import { FormControl, FormLabel, Input, Button, Stack } from '@chakra-ui/react';
