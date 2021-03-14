@@ -15,12 +15,14 @@ const UploadPage = () => {
   const [loading, setLoading] = useState(false);
   const timeoutId = useRef<NodeJS.Timeout | undefined>();
 
-  const handleSubmit = () => {
+  const handleSubmit = (params: { name: string; files: FileList }) => {
     setLoading(true);
-    timeoutId.current = setTimeout(() => {
-      setLoading(false);
-      router.push('/share');
-    }, 1000);
+
+    // TODO: add proper handle to submit it to cdn and generate QR Code of its link
+    // timeoutId.current = setTimeout(() => {
+    //   setLoading(false);
+    //   router.push('/share');
+    // }, 1000);
   };
 
   useEffect(() => {
