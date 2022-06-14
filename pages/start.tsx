@@ -8,6 +8,7 @@ import PageHeader from '@components/PageHeader';
 import UploadForm from '@components/UploadForm';
 import BackgroundOverlay from '@components/BackgroundOverlay';
 import DinnerSvg from '@assets/dinner.svg';
+import { supabase } from '@utils/supabaseClient';
 
 const UploadPage = () => {
   const { t } = useTranslation();
@@ -15,14 +16,33 @@ const UploadPage = () => {
   const [loading, setLoading] = useState(false);
   const timeoutId = useRef<NodeJS.Timeout | undefined>();
 
-  const handleSubmit = (params: { name: string; files: FileList }) => {
+  const handleSubmit = async (params: { name: string; files: FileList }) => {
     setLoading(true);
 
-    // TODO: add proper handle to submit it to cdn and generate QR Code of its link
-    // timeoutId.current = setTimeout(() => {
-    //   setLoading(false);
-    //   router.push('/share');
-    // }, 1000);
+    // TODO: upload to telegram
+
+    await insertRestoData({
+      name: params.name,
+      fileLink: 'https://anthonyju.one',
+    });
+
+    // TODO: generate QR Code
+    setLoading(false);
+    // TODO: navigate to result page
+  };
+
+  const insertRestoData = async (params: {
+    name: string;
+    fileLink: string;
+  }) => {
+    const { error } = await supabase.from('restaurants').insert({
+      name: params.name,
+      menu_link: params.fileLink,
+    });
+
+    if (error) {
+      console.log('error ->', error);
+    }
   };
 
   useEffect(() => {
