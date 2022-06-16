@@ -9,6 +9,7 @@ import UploadForm from '@components/UploadForm';
 import BackgroundOverlay from '@components/BackgroundOverlay';
 import DinnerSvg from '@assets/dinner.svg';
 import { supabase } from '@utils/supabaseClient';
+import { makePostDocRequest, getDocPath } from '@utils/telegramClient';
 
 const UploadPage = () => {
   const { t } = useTranslation();
@@ -16,19 +17,33 @@ const UploadPage = () => {
   const [loading, setLoading] = useState(false);
   const timeoutId = useRef<NodeJS.Timeout | undefined>();
 
+  const sendDocumentMessage = async (file: File) => {
+    const data = new FormData();
+    data.append('document', file);
+    const response = await makePostDocRequest(data);
+    return response;
+  };
+
+  const getFilePath = async (fileID: string) => {
+    const res = await getDocPath(fileID);
+    return res.result.file_path;
+  };
+
   const handleSubmit = async (params: { name: string; files: FileList }) => {
     setLoading(true);
+    try {
+      const response = await sendDocumentMessage(params.files[0]);
+      const filePath = await getFilePath(response.result.document.file_id);
 
-    // TODO: upload to telegram
-
-    await insertRestoData({
-      name: params.name,
-      fileLink: 'https://anthonyju.one',
-    });
-
-    // TODO: generate QR Code
+      await insertRestoData({
+        name: params.name,
+        fileLink: filePath,
+      });
+      router.push(`/share?path=${filePath}&name=${params.name}`);
+    } catch (e) {
+      console.log(e);
+    }
     setLoading(false);
-    // TODO: navigate to result page
   };
 
   const insertRestoData = async (params: {

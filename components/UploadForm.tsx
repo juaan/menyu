@@ -46,7 +46,7 @@ const FormUpload: React.FC<Props> = (props) => {
             onChange={(e) => setFiles(e.currentTarget.files)}
             isRequired
             type="file"
-            accept="image/*,.pdf"
+            accept=".pdf"
             ref={inputRef}
             style={{ display: 'none' }}
           />
