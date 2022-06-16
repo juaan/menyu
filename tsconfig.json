@@ -30,6 +30,9 @@
       ],
       "@locale/*": [
         "locale/*"
+      ],
+      "@utils/*": [
+        "utils/*"
       ]
     }
   },

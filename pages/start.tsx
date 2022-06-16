@@ -8,6 +8,8 @@ import PageHeader from '@components/PageHeader';
 import UploadForm from '@components/UploadForm';
 import BackgroundOverlay from '@components/BackgroundOverlay';
 import DinnerSvg from '@assets/dinner.svg';
+import { supabase } from '@utils/supabaseClient';
+import { makePostDocRequest, getDocPath } from '@utils/telegramClient';
 
 const UploadPage = () => {
   const { t } = useTranslation();
@@ -15,14 +17,47 @@ const UploadPage = () => {
   const [loading, setLoading] = useState(false);
   const timeoutId = useRef<NodeJS.Timeout | undefined>();
 
-  const handleSubmit = (params: { name: string; files: FileList }) => {
-    setLoading(true);
+  const sendDocumentMessage = async (file: File) => {
+    const data = new FormData();
+    data.append('document', file);
+    const response = await makePostDocRequest(data);
+    return response;
+  };
 
-    // TODO: add proper handle to submit it to cdn and generate QR Code of its link
-    // timeoutId.current = setTimeout(() => {
-    //   setLoading(false);
-    //   router.push('/share');
-    // }, 1000);
+  const getFilePath = async (fileID: string) => {
+    const res = await getDocPath(fileID);
+    return res.result.file_path;
+  };
+
+  const handleSubmit = async (params: { name: string; files: FileList }) => {
+    setLoading(true);
+    try {
+      const response = await sendDocumentMessage(params.files[0]);
+      const filePath = await getFilePath(response.result.document.file_id);
+
+      await insertRestoData({
+        name: params.name,
+        fileLink: filePath,
+      });
+      router.push(`/share?path=${filePath}&name=${params.name}`);
+    } catch (e) {
+      console.log(e);
+    }
+    setLoading(false);
+  };
+
+  const insertRestoData = async (params: {
+    name: string;
+    fileLink: string;
+  }) => {
+    const { error } = await supabase.from('restaurants').insert({
+      name: params.name,
+      menu_link: params.fileLink,
+    });
+
+    if (error) {
+      console.log('error ->', error);
+    }
   };
 
   useEffect(() => {

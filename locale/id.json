@@ -40,8 +40,8 @@
         "default": "Pilih Kategori"
       },
       "file": {
-        "label": "Gambar/Pdf",
-        "placeholder": "Upload menyu (pdf/image)"
+        "label": "Upload Pdf menyu kalian (max 10mb)",
+        "placeholder": "Upload menyu (pdf)"
       }
     }
   }
