@@ -14,7 +14,11 @@ type Props = { host: string | null };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context
-) => ({ props: { host: context.req.headers.host || null } });
+) => {
+  const protocol = context.req.headers?.referer?.split('://')[0] || null;
+  const baseUrl = context.req.headers.host || null;
+  return { props: { host: `${protocol}://${baseUrl}` } };
+};
 
 const UploadPage: NextPage<Props> = ({ host }) => {
   const { t } = useTranslation();

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Grid, Box, Stack } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +15,6 @@ const UploadPage = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const timeoutId = useRef<NodeJS.Timeout | undefined>();
 
   const sendDocumentMessage = async (file: File) => {
     const data = new FormData();
@@ -39,7 +38,13 @@ const UploadPage = () => {
         name: params.name,
         fileLink: filePath,
       });
-      router.push(`/share?path=${filePath}&name=${params.name}`);
+      router.push({
+        pathname: '/share',
+        query: {
+          path: filePath,
+          name: params.name,
+        },
+      });
     } catch (e) {
       console.log(e);
     }
@@ -59,14 +64,6 @@ const UploadPage = () => {
       console.log('error ->', error);
     }
   };
-
-  useEffect(() => {
-    return () => {
-      if (timeoutId.current) {
-        clearTimeout(timeoutId.current);
-      }
-    };
-  }, []);
 
   return (
     <Layout>
