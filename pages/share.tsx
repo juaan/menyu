@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 const UploadPage: NextPage<Props> = ({ host }) => {
   const { t } = useTranslation();
   const router = useRouter();
-  const { path, name } = router.query;
+  const { path } = router.query;
 
   // TODO: will be implemented soon
   // const handleShare = () => {
