@@ -8,7 +8,7 @@ import PageHeader from '@components/PageHeader';
 import Barcode from '@components/Barcode';
 import BackgroundOverlay from '@components/BackgroundOverlay';
 import FoodSvg from '@assets/food.svg';
-import { isClient } from '@utils/platform';
+// import { isClient } from '@utils/platform';
 
 type Props = { host: string | null };
 
@@ -19,20 +19,20 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 const UploadPage: NextPage<Props> = ({ host }) => {
   const { t } = useTranslation();
   const router = useRouter();
-  const { path, name } = router.query;
+  const { path } = router.query;
 
-  const handleShare = () => {
-    // TODO: will be implemented soon
-    if (isClient) {
-      navigator
-        // @ts-ignore only invoked if the method exist
-        .share({
-          title: `Menu ${name}`,
-          text: `Menu ${name}`,
-          url: ``,
-        });
-    }
-  };
+  // TODO: will be implemented soon
+  // const handleShare = () => {
+  //   if (isClient) {
+  //     navigator
+  //       // @ts-ignore only invoked if the method exist
+  //       .share({
+  //         title: `Menu ${name}`,
+  //         text: `Menu ${name}`,
+  //         url: ``,
+  //       });
+  //   }
+  // };
   return (
     <Layout>
       <Grid
