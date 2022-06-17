@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 const UploadPage: NextPage<Props> = ({ host }) => {
   const { t } = useTranslation();
   const router = useRouter();
-  const { path } = router.query;
+  const { path, name } = router.query;
 
   // TODO: will be implemented soon
   // const handleShare = () => {
@@ -53,7 +53,7 @@ const UploadPage: NextPage<Props> = ({ host }) => {
             subtilte={t('pages.share.desc')}
           />
           <Stack spacing={2} w={'100%'}>
-            <Barcode value={`${host}/menyu?path=${path}`} />
+            <Barcode value={`${host}/menyu?path=${path}&name=${name}`} />
           </Stack>
         </Stack>
         <Box

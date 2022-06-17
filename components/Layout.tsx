@@ -11,6 +11,7 @@ import {
   Box,
   Progress,
 } from '@chakra-ui/react';
+import Footer from './Footer';
 
 interface Props {
   children: React.ReactNode;
@@ -34,17 +35,25 @@ const Layout: React.FC<Props> = (props) => {
       setNavigating(false);
     });
   }, []);
+  const isNotMenyu = router.pathname !== '/menyu';
 
   return (
     <>
-      <Box as="header" w="100%" position="fixed" zIndex="99">
+      <Box
+        as="header"
+        w="100%"
+        position="fixed"
+        zIndex="99"
+        boxShadow={'lg'}
+        bg="white"
+      >
         <Progress
           size="sm"
           colorScheme="teal"
           value={100}
           isIndeterminate={navigating}
         />
-        <Container maxW="5xl" height="4rem">
+        <Container maxW="5xl" height="4rem" background={'white'}>
           <Flex
             flex={1}
             alignItems="center"
@@ -67,6 +76,7 @@ const Layout: React.FC<Props> = (props) => {
       </Box>
       <Container as="main" maxW="5xl" h="100%" pt={{ sm: '6rem', md: '8rem' }}>
         {props.children}
+        {isNotMenyu && <Footer />}
       </Container>
     </>
   );

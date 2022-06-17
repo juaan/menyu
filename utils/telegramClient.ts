@@ -28,7 +28,6 @@ const getDocPath = (fileID: string) => {
 
 const generateFileURL = (filePath: string | string[]) => {
   const path = `${baseUrl}/file/${botToken}/${filePath}`;
-  console.log(path);
   return path;
 };
 

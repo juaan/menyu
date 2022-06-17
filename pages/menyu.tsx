@@ -1,19 +1,51 @@
 import { useRouter } from 'next/router';
-import { generateFileURL } from '@utils/telegramClient';
+import React, { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import Layout from '@components/Layout';
+
+const PDFLoader = dynamic(() => import('@components/PDFLoader'), {
+  ssr: false,
+});
 
 const MenyuPage = () => {
   const router = useRouter();
-  const { path } = router.query;
-  const fileUrl = generateFileURL(path);
+  const { path, name } = router.query;
+  const [file, setFile] = useState<File | null>(null);
+
+  const getFile = async (path: string | string[]) => {
+    const response = await fetch(`/api/pdf?path=${path}`);
+    return response.blob();
+  };
+
+  useEffect(() => {
+    if (path) {
+      const generateFile = async () => {
+        const result = await getFile(path);
+        console.log('wkwk ->', result);
+        const file = new File([result], `Menyu ${name}`, {
+          type: 'application/pdf',
+        });
+        setFile(file);
+      };
+
+      generateFile();
+    }
+  }, [path]);
+
+  console.log('wkwk', file);
+
+  if (file == null) {
+    return (
+      <Layout>
+        <p>Loading...</p>
+      </Layout>
+    );
+  }
+
   return (
-    <>
-      <iframe
-        src={`http://docs.google.com/gview?url=${fileUrl}&embedded=true`}
-        style={{ width: '100%', height: '100vh' }}
-        frameBorder="0"
-        title="menyu"
-      />
-    </>
+    <Layout>
+      <PDFLoader source={file} />
+    </Layout>
   );
 };
 

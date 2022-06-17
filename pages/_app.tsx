@@ -18,8 +18,8 @@ const breakpoints = createBreakpoints({
 const extendedTheme = extendTheme({
   breakpoints,
   fonts: {
-    body: 'Livvic, system-ui, sans-serif',
-    heading: 'Livvic, system-ui, serif',
+    body: 'Nunito',
+    heading: 'Nunito',
   },
 });
 

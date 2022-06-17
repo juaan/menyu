@@ -8,7 +8,7 @@ export default function SmallFooter() {
       style={{
         left: 0,
         bottom: 0,
-        position: 'absolute',
+        position: 'fixed',
         width: '100%',
         paddingBottom: 8,
       }}
