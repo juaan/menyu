@@ -1,4 +1,3 @@
-import { Box } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import workerSrc from '../pdf-worker';
