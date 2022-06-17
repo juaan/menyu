@@ -45,7 +45,7 @@ const Layout: React.FC<Props> = (props) => {
         position="fixed"
         zIndex="99"
         boxShadow={'lg'}
-        bg="white"
+        background={colorMode === 'dark' ? '#1A202C' : '#fff'}
       >
         <Progress
           size="sm"
@@ -53,7 +53,11 @@ const Layout: React.FC<Props> = (props) => {
           value={100}
           isIndeterminate={navigating}
         />
-        <Container maxW="5xl" height="4rem" background={'white'}>
+        <Container
+          maxW="5xl"
+          height="4rem"
+          background={colorMode === 'dark' ? '#1A202C' : '#fff'}
+        >
           <Flex
             flex={1}
             alignItems="center"

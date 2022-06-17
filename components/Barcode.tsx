@@ -32,19 +32,14 @@ const Barcode: React.FC<Props> = ({ value }) => {
 
   return (
     <>
-      <Stack
-        display="flex"
-        justify={'center'}
-        alignItems={'center'}
-        minW={250}
-        minH={250}
-      >
+      <Stack display="flex" justify={'center'} alignItems={'center'} minW={360}>
         <QRImageEncoder source={source} />
       </Stack>
 
       <Stack
         direction={{ sm: 'row', md: 'row-reverse' }}
-        justify={{ sm: 'flex-end', md: 'center' }}
+        justify={'center'}
+        paddingTop={4}
       >
         {/* <Button colorScheme="teal">{t('common.share')}</Button> */}
         <a href={source} download>
