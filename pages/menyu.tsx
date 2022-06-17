@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Layout from '@components/Layout';
+import { Container } from '@chakra-ui/react';
 
 const PDFLoader = dynamic(() => import('@components/PDFLoader'), {
   ssr: false,
@@ -21,7 +22,6 @@ const MenyuPage = () => {
     if (path) {
       const generateFile = async () => {
         const result = await getFile(path);
-        console.log('wkwk ->', result);
         const file = new File([result], `Menyu ${name}`, {
           type: 'application/pdf',
         });
@@ -44,7 +44,9 @@ const MenyuPage = () => {
 
   return (
     <Layout>
-      <PDFLoader source={file} />
+      <Container w={'100%'} display={'flex'} justifyContent={'center'}>
+        <PDFLoader source={file} />
+      </Container>
     </Layout>
   );
 };

@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import workerSrc from '../pdf-worker';
@@ -16,7 +17,7 @@ export default function PDFViewer({ source }: Props) {
   }
 
   return (
-    <div>
+    <>
       <Document file={source} onLoadSuccess={onDocumentLoadSuccess}>
         {Array.from({ length: numPages }, (_, index) => (
           <Page
@@ -27,6 +28,6 @@ export default function PDFViewer({ source }: Props) {
           />
         ))}
       </Document>
-    </div>
+    </>
   );
 }
