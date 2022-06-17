@@ -27,7 +27,9 @@ const getDocPath = (fileID: string) => {
 };
 
 const generateFileURL = (filePath: string | string[]) => {
-  return `${baseUrl}/file/${botToken}/${filePath}`;
+  const path = `${baseUrl}/file/${botToken}/${filePath}`;
+  console.log(path);
+  return path;
 };
 
 export { makePostDocRequest, getDocPath, generateFileURL };

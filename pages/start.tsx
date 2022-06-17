@@ -19,6 +19,7 @@ const UploadPage = () => {
   const sendDocumentMessage = async (file: File) => {
     const data = new FormData();
     data.append('document', file);
+    data.append('disable_content_type_detection', 'false');
     const response = await makePostDocRequest(data);
     return response;
   };
